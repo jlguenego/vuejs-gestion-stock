@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 
 const articles = [
   { id: "a1", name: "Tournevis", price: 2.99, qty: 200 },
@@ -11,4 +11,4 @@ app.get("/articles", (req, res) => {
   res.json(articles);
 });
 
-module.exports = { api: app };
+export const api = app;
