@@ -43,3 +43,16 @@
     </div>
   </main>
 </template>
+
+<style scoped>
+div.content {
+  display: flex;
+  flex-flow: column;
+  gap: 0.5em;
+}
+
+nav {
+  display: flex;
+  gap: 0.3em;
+}
+</style>

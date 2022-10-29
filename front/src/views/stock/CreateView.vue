@@ -14,7 +14,11 @@
         <div>Quantité</div>
         <input type="text" />
       </label>
-      <button type="button" @click="$router.push($route.matched[0].path)">
+      <button
+        class="primary"
+        type="button"
+        @click="$router.push($route.matched[0].path)"
+      >
         Ajouter
       </button>
     </form>
