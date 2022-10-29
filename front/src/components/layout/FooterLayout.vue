@@ -1,3 +1,5 @@
 <template>
-  <p>Footer ok.</p>
+  <footer>
+    <a href="#"> Mentions Légales </a>
+  </footer>
 </template>
