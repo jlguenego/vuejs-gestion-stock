@@ -1,4 +1,15 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import type { Article } from "@gestionstock/common";
+import { ref, type Ref } from "vue";
+const articles: Ref<Article[]> = ref([
+  { id: "a1", name: "Tournevis", price: 2.99, qty: 100 },
+  { id: "a2", name: "Pelle", price: 5, qty: 34 },
+]);
+
+setTimeout(() => {
+  articles.value.push({ id: "a3", name: "Pioche", price: 5.5, qty: 5 });
+}, 2000);
+</script>
 
 <template>
   <main>
@@ -18,25 +29,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="name">Tournevis</td>
-            <td class="price">2.44 €</td>
-            <td class="qty">100</td>
-          </tr>
-          <tr>
-            <td class="name">Pioche</td>
-            <td class="price">8.00 €</td>
-            <td class="qty">20</td>
-          </tr>
-          <tr>
-            <td class="name">Pelle</td>
-            <td class="price">5.50 €</td>
-            <td class="qty">54</td>
-          </tr>
-          <tr>
-            <td class="name">Marteau</td>
-            <td class="price">3.45 €</td>
-            <td class="qty">34</td>
+          <tr v-for="a in articles" :key="a.id">
+            <td class="name">{{ a.name }}</td>
+            <td class="price">{{ a.price }} €</td>
+            <td class="qty">{{ a.qty }}</td>
           </tr>
         </tbody>
       </table>
