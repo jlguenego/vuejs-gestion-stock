@@ -1,14 +1,8 @@
 <script lang="ts" setup>
-import type { Article } from "@gestionstock/common";
-import { ref, type Ref } from "vue";
-const articles: Ref<Article[]> = ref([
-  { id: "a1", name: "Tournevis", price: 2.99, qty: 100 },
-  { id: "a2", name: "Pelle", price: 5, qty: 34 },
-]);
+import { useArticleStore } from "@/stores/ArticleStore";
 
-setTimeout(() => {
-  articles.value.push({ id: "a3", name: "Pioche", price: 5.5, qty: 5 });
-}, 2000);
+const articleStore = useArticleStore();
+const articles = articleStore.articles;
 </script>
 
 <template>
