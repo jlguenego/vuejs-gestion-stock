@@ -24,3 +24,8 @@ main {
 h1 {
   text-align: center;
 }
+
+::selection {
+  background: blue;
+  color: white;
+}
