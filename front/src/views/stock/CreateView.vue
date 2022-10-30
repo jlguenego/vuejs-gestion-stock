@@ -33,7 +33,10 @@ const submit = async () => {
         <div>Quantité</div>
         <input type="qty" v-model="newArticle.qty" />
       </label>
-      <button class="primary">Ajouter</button>
+      <button class="primary">
+        <fa-icon icon="fa-solid fa-plus"></fa-icon>
+        <span>Ajouter</span>
+      </button>
     </form>
     {{ newArticle }}
   </main>

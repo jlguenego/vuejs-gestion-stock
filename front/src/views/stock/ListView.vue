@@ -30,10 +30,18 @@ const remove = async () => {
     <h1>List view</h1>
     <div class="content">
       <nav>
-        <button @click="refresh">Rafraîchir</button>
-        <button @click="$router.push($route.path + '/create')">Ajouter</button>
-        <button :hidden="selectedArticles.size === 0" @click="remove">
-          Supprimer
+        <button @click="refresh" title="Rafraîchir">
+          <fa-icon icon="fa-solid fa-rotate-right"></fa-icon>
+        </button>
+        <button @click="$router.push($route.path + '/create')" title="Ajouter">
+          <fa-icon icon="fa-solid fa-plus"></fa-icon>
+        </button>
+        <button
+          :hidden="selectedArticles.size === 0"
+          @click="remove"
+          title="Supprimer"
+        >
+          <fa-icon icon="fa-solid fa-trash-alt"></fa-icon>
         </button>
       </nav>
       <table>
