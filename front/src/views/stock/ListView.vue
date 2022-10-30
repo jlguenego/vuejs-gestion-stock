@@ -1,8 +1,19 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
+import type { Article } from "@gestionstock/common";
+import { reactive } from "vue";
 
 const articleStore = useArticleStore();
 const articles = articleStore.articles;
+
+const selectedArticles = reactive(new Set<Article>());
+const toggle = (a: Article) => {
+  if (selectedArticles.has(a)) {
+    selectedArticles.delete(a);
+    return;
+  }
+  selectedArticles.add(a);
+};
 </script>
 
 <template>
@@ -23,7 +34,12 @@ const articles = articleStore.articles;
           </tr>
         </thead>
         <tbody>
-          <tr v-for="a in articles" :key="a.id">
+          <tr
+            v-for="a in articles"
+            :key="a.id"
+            :class="{ selected: selectedArticles.has(a) }"
+            @click="toggle(a)"
+          >
             <td class="name">{{ a.name }}</td>
             <td class="price">{{ a.price }} €</td>
             <td class="qty">{{ a.qty }}</td>
