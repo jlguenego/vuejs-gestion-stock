@@ -15,6 +15,10 @@ const submit = async () => {
   await articleStore.add(newArticle.value);
   await router.push(route.matched[0].path);
 };
+
+const vFocus = {
+  mounted: (el: HTMLElement) => el.focus(),
+};
 </script>
 
 <template>
@@ -23,7 +27,7 @@ const submit = async () => {
     <form @submit.prevent="submit">
       <label>
         <div>Nom</div>
-        <input type="text" v-model="newArticle.name" />
+        <input type="text" v-model="newArticle.name" v-focus />
       </label>
       <label>
         <div>Prix</div>
