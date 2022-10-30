@@ -23,7 +23,7 @@ const toggle = (a: Article) => {
       <nav>
         <button>Rafraîchir</button>
         <button @click="$router.push($route.path + '/create')">Ajouter</button>
-        <button>Supprimer</button>
+        <button :hidden="selectedArticles.size === 0">Supprimer</button>
       </nav>
       <table>
         <thead>
