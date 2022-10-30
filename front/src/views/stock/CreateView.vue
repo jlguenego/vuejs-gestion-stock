@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
-import { type NewArticle, vFocus } from "@gestionstock/common";
+import type { NewArticle } from "@gestionstock/common";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
