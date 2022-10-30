@@ -15,6 +15,10 @@ const toggle = (a: Article) => {
   selectedArticles.add(a);
 };
 
+const refresh = async () => {
+  await articleStore.refresh();
+};
+
 const remove = async () => {
   await articleStore.remove(selectedArticles);
   selectedArticles.clear();
@@ -26,7 +30,7 @@ const remove = async () => {
     <h1>List view</h1>
     <div class="content">
       <nav>
-        <button>Rafraîchir</button>
+        <button @click="refresh">Rafraîchir</button>
         <button @click="$router.push($route.path + '/create')">Ajouter</button>
         <button :hidden="selectedArticles.size === 0" @click="remove">
           Supprimer
