@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
-import type { NewArticle } from "@gestionstock/common";
+import { type NewArticle, vFocus } from "@gestionstock/common";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
@@ -14,10 +14,6 @@ const newArticle = ref<NewArticle>({ name: "Truc", price: 0.01, qty: 1 });
 const submit = async () => {
   await articleStore.add(newArticle.value);
   await router.push(route.matched[0].path);
-};
-
-const vFocus = {
-  mounted: (el: HTMLElement) => el.focus(),
 };
 </script>
 
