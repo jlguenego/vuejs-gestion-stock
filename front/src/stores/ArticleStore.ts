@@ -1,4 +1,8 @@
-import type { Article } from "@gestionstock/common";
+import {
+  type Article,
+  type NewArticle,
+  generateId,
+} from "@gestionstock/common";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
@@ -8,14 +12,10 @@ export const useArticleStore = defineStore("articles", () => {
     { id: "a2", name: "Pelle", price: 5, qty: 34 },
   ] as Article[]);
 
-  return { articles };
-});
+  const add = async (newArticle: NewArticle) => {
+    const article = { ...newArticle, id: generateId() };
+    articles.value.push(article);
+  };
 
-setTimeout(() => {
-  useArticleStore().articles.push({
-    id: "a3",
-    name: "Pioche",
-    price: 5.5,
-    qty: 5,
-  });
-}, 2000);
+  return { articles, add };
+});
