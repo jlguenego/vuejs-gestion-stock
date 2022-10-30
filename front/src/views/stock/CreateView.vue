@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
-import type { NewArticle } from "@gestionstock/common";
+import { type NewArticle, sleep } from "@gestionstock/common";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
+const isAdding = ref(false);
 
 const router = useRouter();
 const route = useRoute();
@@ -12,8 +14,16 @@ const articleStore = useArticleStore();
 const newArticle = ref<NewArticle>({ name: "Truc", price: 0.01, qty: 1 });
 
 const submit = async () => {
-  await articleStore.add(newArticle.value);
-  await router.push(route.matched[0].path);
+  try {
+    isAdding.value = true;
+    await sleep(2000);
+    await articleStore.add(newArticle.value);
+    await router.push(route.matched[0].path);
+  } catch (err) {
+    console.log("err: ", err);
+  } finally {
+    isAdding.value = false;
+  }
 };
 </script>
 
@@ -34,7 +44,10 @@ const submit = async () => {
         <input type="qty" v-model="newArticle.qty" />
       </label>
       <button class="primary">
-        <fa-icon icon="fa-solid fa-plus"></fa-icon>
+        <fa-icon
+          :icon="'fa-solid ' + (isAdding ? 'fa-circle-notch' : 'fa-plus')"
+          :spin="isAdding"
+        ></fa-icon>
         <span>Ajouter</span>
       </button>
     </form>
