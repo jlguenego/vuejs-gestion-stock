@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
 import type { Article } from "@gestionstock/common";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
 
 const articleStore = useArticleStore();
-const articles = articleStore.articles;
+const articles = computed(() => articleStore.articles);
 
 const selectedArticles = reactive(new Set<Article>());
 const toggle = (a: Article) => {
@@ -13,6 +13,11 @@ const toggle = (a: Article) => {
     return;
   }
   selectedArticles.add(a);
+};
+
+const remove = async () => {
+  await articleStore.remove(selectedArticles);
+  selectedArticles.clear();
 };
 </script>
 
@@ -23,7 +28,9 @@ const toggle = (a: Article) => {
       <nav>
         <button>Rafraîchir</button>
         <button @click="$router.push($route.path + '/create')">Ajouter</button>
-        <button :hidden="selectedArticles.size === 0">Supprimer</button>
+        <button :hidden="selectedArticles.size === 0" @click="remove">
+          Supprimer
+        </button>
       </nav>
       <table>
         <thead>

@@ -17,5 +17,9 @@ export const useArticleStore = defineStore("articles", () => {
     articles.value.push(article);
   };
 
-  return { articles, add };
+  const remove = async (selectedArticles: Set<Article>) => {
+    articles.value = articles.value.filter((a) => !selectedArticles.has(a));
+  };
+
+  return { articles, add, remove };
 });
