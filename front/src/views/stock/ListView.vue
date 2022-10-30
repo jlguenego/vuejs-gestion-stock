@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import { useArticleStore } from "@/stores/ArticleStore";
-import type { Article } from "@gestionstock/common";
-import { computed, reactive } from "vue";
+import { sleep, type Article } from "@gestionstock/common";
+import { computed, reactive, ref } from "vue";
+
+const isRefreshing = ref(false);
+const isRemoving = ref(false);
 
 const articleStore = useArticleStore();
 const articles = computed(() => articleStore.articles);
@@ -16,12 +19,28 @@ const toggle = (a: Article) => {
 };
 
 const refresh = async () => {
-  await articleStore.refresh();
+  try {
+    isRefreshing.value = true;
+    await sleep(1000);
+    await articleStore.refresh();
+  } catch (err) {
+    console.log("err: ", err);
+  } finally {
+    isRefreshing.value = false;
+  }
 };
 
 const remove = async () => {
-  await articleStore.remove(selectedArticles);
-  selectedArticles.clear();
+  try {
+    isRemoving.value = true;
+    await sleep(1000);
+    await articleStore.remove(selectedArticles);
+    selectedArticles.clear();
+  } catch (err) {
+    console.log("err: ", err);
+  } finally {
+    isRemoving.value = false;
+  }
 };
 </script>
 
@@ -31,7 +50,10 @@ const remove = async () => {
     <div class="content">
       <nav>
         <button @click="refresh" title="Rafraîchir">
-          <fa-icon icon="fa-solid fa-rotate-right"></fa-icon>
+          <fa-icon
+            icon="fa-solid fa-rotate-right"
+            :spin="isRefreshing"
+          ></fa-icon>
         </button>
         <button @click="$router.push($route.path + '/create')" title="Ajouter">
           <fa-icon icon="fa-solid fa-plus"></fa-icon>
@@ -41,7 +63,12 @@ const remove = async () => {
           @click="remove"
           title="Supprimer"
         >
-          <fa-icon icon="fa-solid fa-trash-alt"></fa-icon>
+          <fa-icon
+            :icon="
+              'fa-solid ' + (isRemoving ? 'fa-circle-notch' : 'fa-trash-alt')
+            "
+            :spin="isRemoving"
+          ></fa-icon>
         </button>
       </nav>
       <table>
