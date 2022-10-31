@@ -1,10 +1,12 @@
 <script lang="ts" setup>
+import ErrorMessage from "@/components/ErrorMessage.vue";
 import { useArticleStore } from "@/stores/ArticleStore";
 import { sleep, type Article } from "@gestionstock/common";
 import { computed, reactive, ref } from "vue";
 
 const isRefreshing = ref(false);
 const isRemoving = ref(false);
+const errorMsg = ref("");
 
 const articleStore = useArticleStore();
 const articles = computed(() => articleStore.articles);
@@ -20,11 +22,13 @@ const toggle = (a: Article) => {
 
 const refresh = async () => {
   try {
+    errorMsg.value = "";
     isRefreshing.value = true;
     await sleep(1000);
     await articleStore.refresh();
   } catch (err) {
     console.log("err: ", err);
+    errorMsg.value = err instanceof Error ? err.message : "Erreur technique";
   } finally {
     isRefreshing.value = false;
   }
@@ -32,12 +36,14 @@ const refresh = async () => {
 
 const remove = async () => {
   try {
+    errorMsg.value = "";
     isRemoving.value = true;
     await sleep(1000);
     await articleStore.remove(selectedArticles);
     selectedArticles.clear();
   } catch (err) {
     console.log("err: ", err);
+    errorMsg.value = err instanceof Error ? err.message : "Erreur technique";
   } finally {
     isRemoving.value = false;
   }
@@ -49,7 +55,7 @@ const remove = async () => {
     <h1>List view</h1>
     <div class="content">
       <nav>
-        <button @click="refresh" title="Rafraîchir">
+        <button @click="refresh" title="Rafraîchir" :disabled="isRefreshing">
           <fa-icon
             icon="fa-solid fa-rotate-right"
             :spin="isRefreshing"
@@ -62,6 +68,7 @@ const remove = async () => {
           :hidden="selectedArticles.size === 0"
           @click="remove"
           title="Supprimer"
+          :disabled="isRemoving"
         >
           <fa-icon
             :icon="
@@ -71,6 +78,7 @@ const remove = async () => {
           ></fa-icon>
         </button>
       </nav>
+      <ErrorMessage :message="errorMsg" />
       <table>
         <thead>
           <tr>
@@ -100,7 +108,6 @@ const remove = async () => {
 div.content {
   display: flex;
   flex-flow: column;
-  gap: 0.5em;
 }
 
 nav {
