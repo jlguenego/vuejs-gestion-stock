@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { useArticleStore } from "@/stores/ArticleStore";
-import { type NewArticle, sleep } from "@gestionstock/common";
-import { ref } from "vue";
+import { ARTICLE_STORE_KEY } from "@/injections";
+import type { ArticleStore } from "@/interfaces/ArticleStore";
+import { sleep, type NewArticle } from "@gestionstock/common";
+import { inject, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const isAdding = ref(false);
@@ -9,7 +10,7 @@ const isAdding = ref(false);
 const router = useRouter();
 const route = useRoute();
 
-const articleStore = useArticleStore();
+const articleStore = inject(ARTICLE_STORE_KEY) as ArticleStore;
 
 const newArticle = ref<NewArticle>({ name: "Truc", price: 0.01, qty: 1 });
 
