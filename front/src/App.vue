@@ -1,7 +1,12 @@
 <script lang="ts" setup>
-import HeaderLayout from "./components/layout/HeaderLayout.vue";
+import { provide } from "vue";
 import BodyLayout from "./components/layout/BodyLayout.vue";
 import FooterLayout from "./components/layout/FooterLayout.vue";
+import HeaderLayout from "./components/layout/HeaderLayout.vue";
+import { ARTICLE_STORE_KEY } from "./injections";
+import { useHttpArticleStore } from "./stores/HttpArticleStore";
+
+provide(ARTICLE_STORE_KEY, useHttpArticleStore());
 </script>
 
 <template>

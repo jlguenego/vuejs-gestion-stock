@@ -1,14 +1,15 @@
 <script lang="ts" setup>
 import ErrorMessage from "@/components/ErrorMessage.vue";
-import { useArticleStore } from "@/stores/ArticleStore";
+import { ARTICLE_STORE_KEY } from "@/injections";
+import type { ArticleStore } from "@/interfaces/ArticleStore";
 import { sleep, type Article } from "@gestionstock/common";
-import { computed, reactive, ref } from "vue";
+import { computed, inject, reactive, ref } from "vue";
 
 const isRefreshing = ref(false);
 const isRemoving = ref(false);
 const errorMsg = ref("");
 
-const articleStore = useArticleStore();
+const articleStore = inject(ARTICLE_STORE_KEY) as ArticleStore;
 const articles = computed(() => articleStore.articles);
 
 const selectedArticles = reactive(new Set<Article>());
