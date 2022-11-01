@@ -17,8 +17,9 @@ const newArticle = ref<NewArticle>({ name: "Truc", price: 0.01, qty: 1 });
 const submit = async () => {
   try {
     isAdding.value = true;
-    await sleep(2000);
+    await sleep(300);
     await articleStore.add(newArticle.value);
+    await articleStore.refresh();
     await router.push(route.matched[0].path);
   } catch (err) {
     console.log("err: ", err);
