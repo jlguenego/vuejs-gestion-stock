@@ -7,7 +7,7 @@ import App from "./App.vue";
 import router from "./router";
 import { vFocus } from "@gestionstock/common";
 import { FontAwesomeIcon } from "./icons/icons";
-import DynamicTitle from "@/components/DynamicTitle.vue";
+import { DynamicTitle } from "@gestionstock/common-front";
 
 const app = createApp(App);
 
