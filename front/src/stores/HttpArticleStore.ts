@@ -1,4 +1,4 @@
-import type { NewArticle } from "@gestionstock/common";
+import type { Article, NewArticle } from "@gestionstock/common";
 import { defineStore } from "pinia";
 import { computed } from "vue";
 import { useArticleStore } from "./ArticleStore";
@@ -21,10 +21,18 @@ export const useHttpArticleStore = defineStore("http-article", () => {
     await axios.post(url, newArticle);
   };
 
+  const remove = async (selectedArticles: Set<Article>) => {
+    const ids = [...selectedArticles].map((a) => a.id);
+    await axios.delete(url, {
+      data: ids,
+    });
+  };
+
   return {
     ...articleStore,
     articles: computed(() => articleStore.articles),
     refresh,
     add,
+    remove,
   };
 });

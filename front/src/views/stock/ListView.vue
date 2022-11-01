@@ -25,7 +25,7 @@ const refresh = async () => {
   try {
     errorMsg.value = "";
     isRefreshing.value = true;
-    await sleep(1000);
+    await sleep(300);
     await articleStore.refresh();
   } catch (err) {
     console.log("err: ", err);
@@ -39,8 +39,9 @@ const remove = async () => {
   try {
     errorMsg.value = "";
     isRemoving.value = true;
-    await sleep(1000);
+    await sleep(300);
     await articleStore.remove(selectedArticles);
+    await articleStore.refresh();
     selectedArticles.clear();
   } catch (err) {
     console.log("err: ", err);

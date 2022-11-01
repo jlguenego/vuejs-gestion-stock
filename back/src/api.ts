@@ -2,7 +2,7 @@ import { Article, generateId, NewArticle } from "@gestionstock/common";
 import express from "express";
 import { json } from "express";
 
-const articles: Article[] = [
+let articles: Article[] = [
   { id: "a1", name: "Tournevis", price: 2.99, qty: 200 },
   { id: "a2", name: "Pelle", price: 5, qty: 15 },
 ];
@@ -20,6 +20,12 @@ app.post("/articles", (req, res) => {
   const article = { ...newArticle, id: generateId() };
   articles.push(article);
   res.status(201).json({ id: article.id });
+});
+
+app.delete("/articles", (req, res) => {
+  const ids: string[] = req.body;
+  articles = articles.filter((a) => !ids.includes(a.id));
+  res.status(204).end();
 });
 
 export const api = app;
