@@ -53,6 +53,7 @@ const remove = async () => {
 </script>
 
 <template>
+  <dynamic-title title="Liste des articles" />
   <main>
     <h1>List view</h1>
     <div class="content">

@@ -1,6 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
+  <dynamic-title title="Liste des articles" />
   <main>
     <h1>Legal view</h1>
     <p>

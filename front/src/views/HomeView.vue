@@ -1,4 +1,5 @@
 <template>
+  <dynamic-title title="Accueil" />
   <main>
     <h1>Gérer efficacement votre stock !</h1>
     <button @click="$router.push('/stock')">Voir le stock</button>
