@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { computed } from "vue";
 import { useArticleStore } from "./ArticleStore";
 
-const url = "http://localhost:3000/api/articles";
+const url = "/api/articles";
 
 export const useHttpArticleStore = defineStore("http-article", () => {
   const articleStore = useArticleStore();
