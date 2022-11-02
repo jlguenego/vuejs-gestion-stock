@@ -58,7 +58,11 @@ const remove = async () => {
     <h1>List view</h1>
     <div class="content">
       <nav>
-        <button @click="refresh" title="Rafraîchir" :disabled="isRefreshing">
+        <button
+          @click="refresh"
+          title="Rafraîchir"
+          v-bind:disabled="isRefreshing"
+        >
           <fa-icon
             icon="fa-solid fa-rotate-right"
             :spin="isRefreshing"
