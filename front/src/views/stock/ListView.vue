@@ -50,6 +50,11 @@ const remove = async () => {
     isRemoving.value = false;
   }
 };
+
+const removeBtnAttributes = computed(() => ({
+  hidden: selectedArticles.size === 0,
+  disabled: isRemoving.value,
+}));
 </script>
 
 <template>
@@ -71,12 +76,7 @@ const remove = async () => {
         <button @click="$router.push($route.path + '/create')" title="Ajouter">
           <fa-icon icon="fa-solid fa-plus"></fa-icon>
         </button>
-        <button
-          :hidden="selectedArticles.size === 0"
-          @click="remove"
-          title="Supprimer"
-          :disabled="isRemoving"
-        >
+        <button @click="remove" title="Supprimer" v-bind="removeBtnAttributes">
           <fa-icon
             :icon="
               'fa-solid ' + (isRemoving ? 'fa-circle-notch' : 'fa-trash-alt')
