@@ -2,7 +2,7 @@
   <header>
     <RouterLink to="/">
       <img src="/images/logo.svg" alt="Logo" />
-      <span>Gestion Stock</span>
+      <span>{{ $appName }}</span>
     </RouterLink>
   </header>
 </template>

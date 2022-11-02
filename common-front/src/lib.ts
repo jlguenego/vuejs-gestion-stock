@@ -15,6 +15,9 @@ const commonFrontPlugin = (
   app.component("dynamic-title", DynamicTitle);
   options.defaultTitlePrefix &&
     app.provide(DEFAULT_TITLE_PREFIX_KEY, options.defaultTitlePrefix);
+
+  app.config.globalProperties.$appName =
+    options.defaultTitlePrefix ?? "Nice App";
 };
 
 export {
@@ -23,3 +26,9 @@ export {
   commonFrontPlugin,
   type CommonFrontPluginOptions,
 };
+
+declare module "@vue/runtime-core" {
+  interface ComponentCustomProperties {
+    $appName: string;
+  }
+}
