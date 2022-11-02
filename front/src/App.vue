@@ -12,7 +12,9 @@ provide(ARTICLE_STORE_KEY, useHttpArticleStore());
 <template>
   <div>
     <HeaderLayout />
-    <BodyLayout />
+    <BodyLayout>
+      <RouterView></RouterView>
+    </BodyLayout>
     <FooterLayout />
   </div>
 </template>
