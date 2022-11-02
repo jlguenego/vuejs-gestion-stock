@@ -102,7 +102,7 @@ const removeBtnAttributes = computed(() => ({
             @click="toggle(a)"
           >
             <td class="name">{{ a.name }}</td>
-            <td class="price">{{ a.price }} €</td>
+            <td class="price">{{ $currency(a.price) }}</td>
             <td class="qty">{{ a.qty }}</td>
           </tr>
         </tbody>

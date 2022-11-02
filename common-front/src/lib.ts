@@ -1,6 +1,7 @@
 import { App, Plugin } from "vue";
 import DynamicTitle from "./components/DynamicTitle.vue";
 import { vFocus } from "./directives/v-focus";
+import { currency } from "./filters/currency";
 import { DEFAULT_TITLE_PREFIX_KEY } from "./keys";
 
 interface CommonFrontPluginOptions {
@@ -18,6 +19,8 @@ const commonFrontPlugin = (
 
   app.config.globalProperties.$appName =
     options.defaultTitlePrefix ?? "Nice App";
+
+  app.config.globalProperties.$currency = currency;
 };
 
 export {
@@ -30,5 +33,6 @@ export {
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     $appName: string;
+    $currency: typeof currency;
   }
 }
