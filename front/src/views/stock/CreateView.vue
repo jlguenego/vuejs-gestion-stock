@@ -27,6 +27,10 @@ const submit = async () => {
     isAdding.value = false;
   }
 };
+
+const log = (evt: CustomEvent) => {
+  console.log("evt: ", evt.detail);
+};
 </script>
 
 <template>
@@ -36,7 +40,12 @@ const submit = async () => {
     <form @submit.prevent="submit">
       <label>
         <div>Nom</div>
-        <input type="text" v-model="newArticle.name" v-focus="'selectall'" />
+        <input
+          type="text"
+          v-model="newArticle.name"
+          v-focus="'selectall'"
+          @empty="log"
+        />
       </label>
       <label>
         <div>Prix</div>
