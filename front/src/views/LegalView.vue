@@ -1,9 +1,12 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import ProjectVersion from "@/components/ProjectVersion";
+</script>
 
 <template>
   <dynamic-title title="Liste des articles" />
   <main>
     <h1>Legal view</h1>
+    <ProjectVersion prefix="version" />
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
       reiciendis dignissimos odio rem laudantium illo dolorum aperiam maxime
