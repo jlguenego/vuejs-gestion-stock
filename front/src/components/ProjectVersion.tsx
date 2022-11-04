@@ -1,4 +1,4 @@
-import { type Component, h } from "vue";
+import type { Component } from "vue";
 import { version } from "../../package.json";
 
 const ProjectVersion: Component = {
@@ -6,7 +6,11 @@ const ProjectVersion: Component = {
     prefix: String,
   },
   setup(props) {
-    return () => h("div", (props.prefix ?? "The version is") + ": " + version);
+    return () => (
+      <div>
+        jsx {props.prefix ?? "The version is now"} : {version}
+      </div>
+    );
   },
 };
 
